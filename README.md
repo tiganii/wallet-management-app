@@ -19,22 +19,36 @@ This application is a simulation of basic wallet operations like add funds, tran
 ## Installation
 - Clone the repository and cd into wallet-management-app
 - Install dependencies
-```bash composer install ``
+```bash 
+    composer install 
+```
 - Copy .env.example into .env file and setup the database connection 
 - Run unit and feature tests => 
-```bash php artisan test ```  
+```bash 
+    php artisan test 
+```
     (Note the test will take a minute to test api rate limiter )
 - Run the migration and seeder 
-    ```bash php artisan migrate  --seed ```
+```bash 
+    php artisan migrate  --seed 
+```
 - Generate the application key 
-    ```bash php artisan key:generate ```
+```bash 
+    php artisan key:generate 
+```
 - Create JWT token secret 
-    ```bash php artisan jwt:secret ```
+```bash 
+    php artisan jwt:secret 
+```
 - Setup smtp mail configuration in .env and the user can receive real notification 
 - Start the server 
-    ```bash php artisan serve ```
+```bash 
+    php artisan serve 
+```
 - Run the queue to send notification 
-    ```bash php artisan queue:work ```
+```bash 
+    php artisan queue:work 
+```
 
 ## Credits
 Acknowledge to whom give the opportunity to work on the project.
