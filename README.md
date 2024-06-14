@@ -27,7 +27,7 @@ This application is a simulation of basic wallet operations like add funds, tran
 ```bash 
     php artisan test 
 ```
-    (Note the test will take a minute to test api rate limiter )
+- (Note the test will take a minute to test api rate limiter )
 - Run the migration and seeder 
 ```bash 
     php artisan migrate  --seed 
@@ -45,7 +45,7 @@ This application is a simulation of basic wallet operations like add funds, tran
 ```bash 
     php artisan serve 
 ```
-- Run the queue to send notification 
+- Run the queue to run the event listeners and send notifications to users
 ```bash 
     php artisan queue:work 
 ```
