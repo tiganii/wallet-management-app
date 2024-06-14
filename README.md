@@ -19,7 +19,7 @@ This application is a simulation of basic wallet operations like add funds, tran
 - Clone the repository and cd into wallet-management-app
 - Install dependencies => composer install 
 - Copy .env.example into .env file and setup the database connection 
-- Run unit and feature tests => php artisan test
+- Run unit and feature tests => php artisan test  (Note the test will take a minute to test api rate limiter )
 - Run the migration and seeder => php artisan migrate  —seed
 - Generate the application key => php artisan key:generate
 - Create JWT token secret =>  php artisan jwt:secret

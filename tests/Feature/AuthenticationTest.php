@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Wallet;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -31,34 +32,34 @@ it('assure application protected routes response for authenticated users', funct
     $response->assertStatus(200)->assertJson(fn(AssertableJson $json) => $json->hasAll(['success', 'message', 'user']));
 });
 
-// it('assure application throw rate limit when allowed requests exceeded, and works after decay period passes', function () {
-//     $route = '/api/v1/';
-//     $maxAttempts = 10; // Maximum number of allowed requests
-//     $decayMinutes = 1; // Time window in minutes
+it('assure application throw rate limit when allowed requests exceeded, and works after decay period passes', function () {
+    $route = '/api/v1/';
+    $maxAttempts = 10; // Maximum number of allowed requests
+    $decayMinutes = 1; // Time window in minutes
 
-//     // Clear rate limiter for the route
-//     RateLimiter::clear($route);
+    // Clear rate limiter for the route
+    RateLimiter::clear($route);
 
-//     // Simulate maxAttempts requests within the time window
-//     for ($i = 0; $i < $maxAttempts; $i++) {
-//         $response = $this->get($route);
-//         $response->assertStatus(200); // Assuming a 200 OK response for valid requests
-//     }
+    // Simulate maxAttempts requests within the time window
+    for ($i = 0; $i < $maxAttempts; $i++) {
+        $response = $this->get($route);
+        $response->assertStatus(200); // Assuming a 200 OK response for valid requests
+    }
 
-//     // The next request should be rate limited
-//     $response = $this->get($route);
-//     $response->assertStatus(429); // Too Many Requests
-//     $response->assertJson([
-//         'message' => 'Too many request, please slow down.',
-//     ]);
+    // The next request should be rate limited
+    $response = $this->get($route);
+    $response->assertStatus(429); // Too Many Requests
+    $response->assertJson([
+        'message' => 'Too many request, please slow down.',
+    ]);
 
-//     // Wait for the decay period to pass
-//     sleep($decayMinutes * 60);
+    // Wait for the decay period to pass
+    sleep($decayMinutes * 60);
 
-//     // The request should now be allowed again
-//     $response = $this->get($route);
-//     $response->assertStatus(200);
-// });
+    // The request should now be allowed again
+    $response = $this->get($route);
+    $response->assertStatus(200);
+});
 
 it('registers a user and returns a non-empty access token in the data object', function () {
     // Prepare registration data
